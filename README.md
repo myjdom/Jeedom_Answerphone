@@ -24,8 +24,10 @@
    
     étape 2 : PULL (lecture_repondeur)
       Pour lire les messages on se base sur la détection de présence basé sur un simple capteur
-      qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]#
-      Voici le code pour déterminer s'il y des messages dans la file d'attente :
+      qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]# (ceci est exemple)
+      La reconnaissance des personnes avec une camera avec opencv est une autre méthode de détection 
+      qui permet une meilleure identification. (une démo avec opencv sera proposée ultérieurement)
+      Le scénario sollicité est le suivant :
        ACTION CODE :
         $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --size 2>&1');
         $scenario->setData('return', $output);
@@ -34,10 +36,10 @@
          $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --pull-all 2>&1');
          $output = html_entity_decode($output);
          $scenario->setData('return', $output);
-        ACTION : #[GoogleCast][Salon Google Home][Parle !]# 
+       ACTION : #[GoogleCast][Salon Google Home][Parle !]# 
          Message : cmd=tts|value=variable(return)|speed=1.2|engine=gttsapi|voice=male|lang=fr-FR
    
-   Toutes les options : 
+   Toutes les options que l'on peut passer dans #TITLE# (le message étant passé obligatoirement dans #MESSAGE#): 
    
     ./notification_client.py --help
 
