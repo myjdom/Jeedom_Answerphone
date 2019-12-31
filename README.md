@@ -2,7 +2,9 @@
 
 ###########################################################################################
 
-    Répondeur Jeedom : gère une file d'attente des messages Jeedom en mode client/serveur pour les délivrer en TTS avec GoogleCast au moment ou une personne est présente dans la pièce ou se trouve le Google Home 
+    Répondeur Jeedom : gère une file d'attente des messages Jeedom en mode client/serveur 
+    afin des les délivrer en TTS avec GoogleCast au moment ou une personne est présente 
+    dans la pièce ou se trouve le Google Home 
 
     ./notification_client.py --help
 
