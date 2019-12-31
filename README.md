@@ -1,6 +1,6 @@
 # Jeedom_Answerphone
 
-###########################################################################################
+   Introduction :
 
     Répondeur Jeedom : gère une file d'attente des messages Jeedom en mode client/serveur 
     afin de délivrer les message en TTS (Text To Speech) avec le plugin GoogleCast au moment ou une personne 
@@ -33,7 +33,9 @@
          $scenario->setData('return', $output);
         ACTION : #[GoogleCast][Salon Google Home][Parle !]# 
          Message : cmd=tts|value=variable(return)|speed=1.2|engine=gttsapi|voice=male|lang=fr-FR
-    
+   
+   Toutes les options : 
+   
     ./notification_client.py --help
 
     Usage1  : --push 'message' [--answerphone-number number] [--tag tag_name] [--priority number] [--replace] [--no-duplicate] [--expire seconds] [--no-timestamp]
@@ -58,7 +60,7 @@
     --no-timestamp permet de ne pas préfixer le message par l'heure arrivée
     
     
-    Exemples simple sans numéro de répondeur (par défaut 0) et sans tag :
+   Exemples simple sans numéro de répondeur (par défaut 0) et sans tag :
     
      ./notification_client.py --push 'bonjour philippe'
         ==> met en attente un message sur le répondeur par défaut numéro 0 'bonjour philippe'
@@ -72,7 +74,7 @@
      ./notification_client.py --list
        ==> retourne la liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
        
-    Exemples avec un numéro de répondeur et un tag :
+   Exemples avec un numéro de répondeur et un tag :
     
      ./notification_client.py --push 'le vérrou du portail est ouvert' --answerphone-number 1 --tag verrou_portail
        ==> met en attente un message sur le répondeur numéro 1 avec le tag verrou_portail
@@ -89,8 +91,6 @@
      ./notification_client.py --size --answerphone-number 1 --tag verrou_portail
        ==> retourne la taile de liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
        
-###########################################################################################
-
    Exercise : utilisation du répondeur pour des citations venant de Kaamelott-Quote.py
    
     script à créer /var/www/html/plugins/script/core/ressources/Kaamelott-Quote.py avec le plugin jeeXplorer ou en session ssh.
@@ -118,9 +118,7 @@
       
       Le Google home diffusera la citation Kaamelott (TTS) uniquement au moment ou une personne sera présente dans la pièce.
    
-###########################################################################################
-
-    Sample :
+   Exemple en ligen de commande dans une session ssh :
 
     ./notification_client.py --purge
     0
@@ -145,9 +143,7 @@
     0
 
 
-###########################################################################################
-
-    Installation en session ssh de préférence ou alors avec le plugin jeeXplorer :
+   Installation en session ssh de préférence ou alors avec le plugin jeeXplorer :
 
     * mkdir /root/daemon_server
     * Create /root/daemon_server/notification_server.py
@@ -161,9 +157,7 @@
     * Configurer Etape 1 PUSH et Etape 2 PULL dans Jeedom
 
 
-###########################################################################################
-
-    Debug : 
+   Debug : 
 
     * log here : /var/log/notifications.log
     * all messages are dumped here (csv format) : /var/tmp/notifications.dump
