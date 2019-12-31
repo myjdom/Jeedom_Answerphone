@@ -4,7 +4,14 @@
 # simple daemon message_list push/pull notification
 ##################################################
 # https://www.geeksforgeeks.org/python-convert-a-string-representation-of-list-into-list/
-#
+#-------------------------------------------------------------
+# Create  /root/daemon_server/notification_server.py
+# Create /root/daemon_server/notification_client.py
+#-------------------------------------------------------------
+# Create /etc/systemd/system/notification_server.service
+# systemctl enable notification_server
+# systemctl start notification_server
+#------------------------------------------------------------
 
 import sys
 import os
