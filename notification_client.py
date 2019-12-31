@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 # coding: utf8
+#-------------------------------------------------------------
+# Create  /root/daemon_server/notification_server.py
+# Create /root/daemon_server/notification_client.py
+#-------------------------------------------------------------
+# Create /etc/systemd/system/notification_server.service
+# systemctl enable notification_server
+# systemctl start notification_server
+#------------------------------------------------------------
+
 import socket
 import traceback
 import sys
