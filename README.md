@@ -8,19 +8,21 @@
     de personnes ou de visages avec opencv.
     
     notification_client.py est appelé dans Jeedom via le plugin de programmation script :
+    Fonction push_message :
     /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
     
     ./notification_client.py --help
 
-    Usage1 : --push 'message' [--answerphone-number number] [--tag tag_name] [--replace] [--priority 0|1] [--expire seconds] [--no-timestamp]
-    Usage2 : --pull           [--answerphone-number number] [--tag tag_name] [--priority 0|1]
-    Usage3 : --cancel         [--answerphone-number number] tag_name
-    Usage4 : --size           [--answerphone-number number] [--tag tag_name]
-    Usage5 : --list           [--answerphone-number number] [--tag tag_name]
-    Usage6 : --list-all
-    Usage7 : --purge
-    Usage8 : --help
-
+    Usage1  : --push 'message' [--answerphone-number number] [--tag tag_name] [--priority number] [--replace] [--no-duplicate] [--expire seconds] [--no-timestamp]
+    Usage2  : --pull           [--answerphone-number number] [--tag tag_name] [--priority number]
+    Usage2  : --pull-all       [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number]
+    Usage4  : --size           [--answerphone-number number] [--tag tag_name] [--priority numner]
+    Usage5  : --list           [--answerphone-number number] [--tag tag_name] [--priority number]
+    Usage6  : --cancel         [--answerphone-number number] tag_name
+    Usage7  : --list-all
+    Usage9  : --purge
+    Usage10 : --help
+  
     Exemples simple sans numéro de répondeur (par défaut 0) et sans tag :
     
      ./notification_client.py --push 'bonjour philippe'
@@ -83,10 +85,11 @@
 
     Installation :
 
-
-    * Create  /root/daemon_server/notification_server.py
+    * mkdir /root/daemon_server
+    * Create /root/daemon_server/notification_server.py
     * Create /root/daemon_server/notification_client.py
-    * Optional : Change port 8085 if you want in code here notification_server.py and here notification_client.py
+    * Optional : Change port 8085 if you want in python code notification_server.py and notification_client.py
+    * ln -s /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
     * Create /etc/systemd/system/notification_server.service
     * systemctl enable notification_server
     * systemctl start notification_server
