@@ -11,8 +11,8 @@
     
    Généralités :
    
-   étape 1 : PUSH (push_message)
-     Pour mettre en file d'attente les messages le python notification_client.py est appelé dans Jeedom via le plugin de programmation script :
+    étape 1 : PUSH (push_message)
+       Pour mettre en file d'attente les messages le python notification_client.py est appelé dans Jeedom via le plugin de programmation script :
        /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
        Il va solliciter les services du daemon notification_server.py sur le port 8085 pour lui demander
        de prendre en charge la gestion globale des messages.
