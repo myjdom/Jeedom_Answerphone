@@ -1,0 +1,20 @@
+#-------------------------------------------------------------
+# Create /etc/systemd/system/notification_server.service
+# systemctl enable notification_server
+# systemctl start notification_server
+#-------------------------------------------------------------
+[Unit]
+Description=notification server
+After=network-online.target
+
+[Service]
+#Type=oneshot
+Type=Simple
+ExecStart=/usr/bin/python3 /root/daemon_server/notification_server.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=network-online.target
+WantedBy=multi-user.target
+
