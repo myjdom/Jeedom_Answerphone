@@ -7,9 +7,24 @@
     est présente dans la pièce ou se trouve le Google Home via un scénario basé sur un simple détecteur
     de présence ou une reconnaissance de personnes ou de visages avec opencv.
     
-    notification_client.py est appelé dans Jeedom via le plugin de programmation script :
-    Fonction push_message :
-    /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
+    étape 1 : PUSH (push_message)
+     Pour mettre en file d'attente les messages le python notification_client.py est appelé dans Jeedom via le plugin de programmation script :
+       /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
+       Il va solliciter les services du daemon notification_server.py sur le port 8085 pour lui demander de prendre en charge la gestion globale des messages.
+       la zone Titre (#title#) permet de prostionner des options tel que par exemple : --tag verrou_portail --replace
+    étape 2 : PULL (lecture_repondeur)
+       la zone Message (#message#) sera exclusivement réservé au contenu du message.
+     Pour lire les messages on se base sur la détection de présence basé sur un simple capteur qui sollicte un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]#
+     Code pour déterminer s'il y des messages dans la file d'attente :
+       $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --size 2>&1');
+       $scenario->setData('return', $output);
+       SI variable(return) == 0 ALORS stop
+       SINON ACTION CODE :  
+         $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --pull-all 2>&1');
+         $output = html_entity_decode($output);
+         $scenario->setData('return', $output);
+        ACTION : #[GoogleCast][Salon Google Home][Parle !]# 
+         Message : cmd=tts|value=variable(return)|speed=1.2|engine=gttsapi|voice=male|lang=fr-FR
     
     ./notification_client.py --help
 
