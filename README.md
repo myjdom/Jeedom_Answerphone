@@ -2,23 +2,16 @@
 
 Répondeur Jeedom : gère une file d'attente des messages Jeedom en mode client/serveur pour les délivrer en TTS avec GoogleCast au moment ou une personne est présente dans la pièce ou se trouve le Google Home 
 
-./notification_client.py --help
+ ./notification_client.py --help
 
-Usage1 : --push 'message' [--answerphone-number number] [--tag tag_name] [--replace] [--priority 0|1] [--expire seconds] [--no-timestamp]
-
-Usage2 : --pull           [--answerphone-number number] [--tag tag_name] [--priority 0|1]
-
-Usage3 : --cancel         [--answerphone-number number] tag_name
-
-Usage4 : --size           [--answerphone-number number] [--tag tag_name]
-
-Usage5 : --list           [--answerphone-number number] [--tag tag_name]
-
-Usage6 : --list-all
-
-Usage7 : --purge
-
-Usage8 : --help
+ Usage1 : --push 'message' [--answerphone-number number] [--tag tag_name] [--replace] [--priority 0|1] [--expire seconds] [--no-timestamp]
+ Usage2 : --pull           [--answerphone-number number] [--tag tag_name] [--priority 0|1]
+ Usage3 : --cancel         [--answerphone-number number] tag_name
+ Usage4 : --size           [--answerphone-number number] [--tag tag_name]
+ Usage5 : --list           [--answerphone-number number] [--tag tag_name]
+ Usage6 : --list-all
+ Usage7 : --purge
+ Usage8 : --help
 
 
 Sample :
