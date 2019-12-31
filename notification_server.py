@@ -8,7 +8,7 @@
 # Create  /root/daemon_server/notification_server.py
 # Create /root/daemon_server/notification_client.py
 #-------------------------------------------------------------
-# Change port 8085 if you want in code here notification_server.py 
+# Optional : Change port 8085 if you want in code here notification_server.py 
 # and here notification_client.py
 #-------------------------------------------------------------
 # Create /etc/systemd/system/notification_server.service
