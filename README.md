@@ -33,7 +33,7 @@
        
     Exemples avec un numéro de répondeur et un tag :
     
-    ./notification_client.py --push 'le vérrou du portail est ouvert' --answerphone-number 1 --tag verrou_portail
+     ./notification_client.py --push 'le vérrou du portail est ouvert' --answerphone-number 1 --tag verrou_portail
        ==> met en attente un message sur le répondeur numéro 1 avec le tag verrou_portail
        
      ./notification_client.py --push 'le vérrou du portail est fermé' --answerphone-number 1 --tag verrou_portail --replace --expire 3600
