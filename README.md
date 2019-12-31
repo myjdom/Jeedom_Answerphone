@@ -58,4 +58,10 @@
 
 
 
+Debug : 
 
+    * log here : /var/log/notifications.log
+    * all messages are dumped here (csv format) : /var/tmp/notifications.dump
+    Sample :
+       #answer_number|timestamp_long|timestamp|read_timestamp_long|read_timestamp|read|cancel|priority|expire|tag|message|
+0|2019-12-31 15:08:42|1577801322|2019-12-31 15:09:33|1577801373|1|0|0|0|notag|à 15h08 bonjour|
