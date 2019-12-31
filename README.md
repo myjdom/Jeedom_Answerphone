@@ -12,12 +12,13 @@
    Généralités :
    
     étape 1 : PUSH (push_message)
-       Pour mettre en file d'attente les messages le python notification_client.py est appelé dans Jeedom via le plugin de programmation script :
+       Pour mettre en file d'attente les messages le python notification_client.py est appelé dans Jeedom via le plugin
+       de programmation script :
        /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
        Il va solliciter les services du daemon notification_server.py sur le port 8085 pour lui demander
        de prendre en charge la gestion globale des messages.
-       la zone Titre (#title#) permet de prostionner des options tel que par exemple : --tag verrou_portail --replace
-       la zone Message (#message#) sera exclusivement réservé au contenu du message.
+       la zone Titre (#title#) permet de postionner des options tel que par exemple : --tag verrou_portail --replace
+       la zone Message (#message#) sera exclusivement réservée au contenu du message.
    
     étape 2 : PULL (lecture_repondeur)
       Pour lire les messages on se base sur la détection de présence basé sur un simple capteur qui sollicte un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]#
@@ -48,10 +49,12 @@
     Les options --cancel --replace --no-duplicate --expire permettent de gérer les messages dans la file d'attente.
     Il faut obligatoirement les associer avec un tag pour les options : --cancel --replace --no-duplicate
     
-    L'option --list-all permet de voir l'historique et comment le message a été traité (soit un read ou un cancel suite à un replace ou un expire):
+    L'option --list-all permet de voir l'historique et comment le message a été traité 
+     (soit un read ou un cancel suite à un replace ou un expire):
       read=1 cancel=0 priority=0 expire=0 elapse=no_expire
       
-    Par défaut chaque message est horodaté pour le jour de sa création (timestamp) pour savoir à quelle heure le message a été créé : "à 10h30 vous avez reçu un colis dans la boite au lettre"
+    Par défaut chaque message est horodaté pour le jour de sa création (timestamp) 
+    pour savoir à quelle heure le message a été créé : "à 10h30 vous avez reçu un colis dans la boite au lettre"
     --no-timestamp permet de ne pas préfixer le message par l'heure arrivée
     
     
@@ -90,7 +93,7 @@
 
    Exercise : utilisation du répondeur pour des citations venant de Kaamelott-Quote.py
    
-   script à créer /var/www/html/plugins/script/core/ressources/Kaamelott-Quote.py avec le plugin jeeXplorer ou en session ssh.
+    script à créer /var/www/html/plugins/script/core/ressources/Kaamelott-Quote.py avec le plugin jeeXplorer ou en session ssh.
    
     #!/usr/bin/env python3
     # coding: utf8
