@@ -21,7 +21,8 @@
        la zone Message (#message#) sera exclusivement réservée au contenu du message.
    
     étape 2 : PULL (lecture_repondeur)
-      Pour lire les messages on se base sur la détection de présence basé sur un simple capteur qui sollicte un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]#
+      Pour lire les messages on se base sur la détection de présence basé sur un simple capteur
+      qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]#
       Voici le code pour déterminer s'il y des messages dans la file d'attente :
        ACTION CODE :
         $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --size 2>&1');
@@ -80,7 +81,7 @@
        ==> met en attente un message sur le répondeur numéro 1 avec le tag verrou_portail
        
      ./notification_client.py --push 'le vérrou du portail est fermé' --answerphone-number 1 --tag verrou_portail --replace --expire 3600
-       ==> replace le message en attente sur le répondeur numéro 1 avec le tag verrou_portail (expire dans 1h)
+       ==> replace le message en attente sur le répondeur numéro 1 avec le tag verrou_portail qui va expirer dans 1h (cancel)
     
      ./notification_client.py --cancel --answerphone-number 1 verrou_portail
        ==> annule tous les messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
