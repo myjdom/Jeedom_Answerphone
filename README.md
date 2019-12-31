@@ -53,4 +53,16 @@ index=0 answerphone=0 2019-12-31 15:08:42 read=1 cancel=0 priority=0 expire=0 el
 
 0
 
+Installation :
+
+#-------------------------------------------------------------
+# Create  /root/daemon_server/notification_server.py
+# Create /root/daemon_server/notification_client.py
+#-------------------------------------------------------------
+# Create /etc/systemd/system/notification_server.service
+# systemctl enable notification_server
+# systemctl start notification_server
+#------------------------------------------------------------
+
+
 
