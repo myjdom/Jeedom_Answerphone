@@ -11,14 +11,16 @@
     
    Généralités :
    
+    Tout ce passe toujours en deux étapes :
+   
     étape 1 : PUSH (push_message)
        Pour mettre en file d'attente les messages le python notification_client.py est appelé dans Jeedom 
        via le plugin de programmation script :
        /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
        Il va solliciter les services du daemon notification_server.py sur le port 8085 pour lui demander
        de prendre en charge la gestion globale des messages.
-       la zone Titre (#title#) permet de postionner des options tel que par exemple : --tag verrou_portail --replace
-       la zone Message (#message#) sera exclusivement réservée au contenu du message.
+       La zone Titre (#title#) permet de postionner des options tel que par exemple : --tag verrou_portail --replace
+       La zone Message (#message#) sera exclusivement réservée au contenu du message.
    
     étape 2 : PULL (lecture_repondeur)
       Pour lire les messages on se base sur la détection de présence basé sur un simple capteur
@@ -67,30 +69,39 @@
         ==> met en attente un message sur le répondeur par défaut numéro 0 'bonjour philippe'
        
      ./notification_client.py --pull
-       ==> retourne le message en attente sur le répondeur : ici 'bonjour philippe'
+       ==> retourne le dernier message non lu en attente sur le répondeur : ici 'bonjour philippe'
+       
+     ./notification_client.py --pull-all
+       ==> retourne tous les derniers messages non lu en attente sur le répondeur
        
      ./notification_client.py --size
-       ==> retourne la taille de la liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       ==> retourne la taille de la liste des messages en attente de lecture sur le répondeur
        
      ./notification_client.py --list
-       ==> retourne la liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       ==> retourne la liste des messages en attente de lecture sur le répondeur
        
    Exemples avec un numéro de répondeur et un tag :
     
-     ./notification_client.py --push 'le vérrou du portail est ouvert' --answerphone-number 1 --tag verrou_portail
+     ./notification_client.py --push 'le verrou du portail est ouvert' --answerphone-number 1 --tag verrou_portail
        ==> met en attente un message sur le répondeur numéro 1 avec le tag verrou_portail
        
-     ./notification_client.py --push 'le vérrou du portail est fermé' --answerphone-number 1 --tag verrou_portail --replace --expire 3600
-       ==> replace le message en attente sur le répondeur numéro 1 avec le tag verrou_portail qui va expirer dans 1h (cancel)
+     ./notification_client.py --push 'le verrou du portail est fermé' --answerphone-number 1 --tag verrou_portail --replace --expire 3600
+       ==> remplace le message en attente sur le répondeur numéro 1 avec le tag verrou_portail et va expirer dans 1h (cancel)
     
      ./notification_client.py --cancel --answerphone-number 1 verrou_portail
-       ==> annule tous les messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       ==> annule tous les messages en attente sur le répondeur numéro 1 avec le tag verrou_portail
        
      ./notification_client.py --list --answerphone-number 1 --tag verrou_portail
-       ==> retourne la liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       ==> retourne la liste des messages en attente de lecture sur le répondeur numéro 1 pour le tag verrou_portail
        
      ./notification_client.py --size --answerphone-number 1 --tag verrou_portail
-       ==> retourne la taile de liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       ==> retourne la taille de liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       
+     ./notification_client.py --pull --answerphone-number 1 --tag verrou_portail
+       ==> retourne le dernier message en attente de lecture sur le répondeur numéro 1 pour le tag verrou_portail
+       
+     ./notification_client.py --pull-all --answerphone-number 1 --tag verrou_portail
+       ==> retourne tous les derniers messages en attente de lecture sur le répondeur numéro 1 pour le tag verrou_portail
        
    Exercise : utilisation du répondeur pour des citations venant de Kaamelott-Quote.py
    
@@ -117,9 +128,11 @@
       Titre : --no-timestamp --tag kaamelott --priority 1 --tag PHILIPPE
       Message :  variable(Quote)
       
-      Le Google home diffusera la citation Kaamelott (TTS) uniquement au moment ou une personne sera présente dans la pièce.
+      ==> Jeedom va mettre une citation Kaamelott sur le répondeur pour le mettre en attente de lecture (étape 1 PUSH)
+      ==> Puis Google home diffusera une citation Kaamelott (TTS) uniquement au moment ou une personne 
+      sera présente dans la pièce (étape 2 PULL).
    
-   Exemple en ligen de commande dans une session ssh :
+   Exemple en ligne de commande dans une session ssh :
 
     ./notification_client.py --purge
     0
