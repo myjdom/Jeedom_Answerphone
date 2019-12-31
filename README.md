@@ -17,6 +17,39 @@
     Usage7 : --purge
     Usage8 : --help
 
+    Exemples simple sans numéro de répondeur (par défaut 0) et sans tag :
+    
+    ./notification_client.py --push 'bonjour philippe'
+       ==> met en attente un message sur le répondeur par défaut numéro 0 'bonjour philippe'
+       
+       ./notification_client.py --pull
+       ==> retourne le message en attente sur le répondeur : ici 'bonjour philippe'
+       
+    ./notification_client.py --push 'le vérrou du portail est ouvert' --answerphone-number 1 --tag verrou_portail
+       ==> met en attente un message sur le répondeur numéro 1 avec le tag verrou_portail
+    
+    ./notification_client.py --size
+       ==> retourne la taile de la liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       
+    ./notification_client.py --list
+       ==> retourne la liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       
+    Exemples avec un numéro de répondeur et un tag :
+    
+    ./notification_client.py --push 'le vérrou du portail est ouvert' --answerphone-number 1 --tag verrou_portail
+       ==> met en attente un message sur le répondeur numéro 1 avec le tag verrou_portail
+       
+    ./notification_client.py --push 'le vérrou du portail est fermé' --answerphone-number 1 --tag verrou_portail --replace --expire 3600
+       ==> replace le message en attente sur le répondeur numéro 1 avec le tag verrou_portail (expire dans 1h)
+    
+    ./notification_client.py --cancel --answerphone-number 1 verrou_portail
+       ==> annule tous les messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       
+    ./notification_client.py --list --answerphone-number 1 --tag verrou_portail
+       ==> retourne la liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
+       
+    ./notification_client.py --size --answerphone-number 1 --tag verrou_portail
+       ==> retourne la taile de liste des messages en attente sur le répondeur numéro 1 pour le tag verrou_portail
 
 ###########################################################################################
 
