@@ -157,11 +157,12 @@
       
    Exercise 2 : utilisation du répondeur avec telegram
    
-      L'idée est de déposer avec telegram un message sur le répondeur qui sera lu dès qu'une personne sera présente
-      dans la pièce du Google Home. Ainsi à distance de votre domicile vous pouvez envoyer des messages en TTS.
+      L'idée est de déposer avec telegram un message sur le répondeur qui sera lu dès qu'une personne sera 
+      présente dans la pièce du Google Home. 
+      Ainsi à distance de votre domicile vous pouvez envoyer des messages en TTS.
         Sur telegram cela donne quelque chose comme ça :
-        push je suis bloqué dans les transports et j'aurais du retard.
-        retour : j'ai écrit sur le répondeur je suis bloqué dans les transports et j'aurais du retard.
+        push je suis bloqué dans les transports et je serai en retard.
+        retour : j'ai écrit sur le répondeur je suis bloqué dans les transports et je serai en retard.
         
       Pour cela vous devez créer une interaction que l'on va appeler "push" dans l'exemple.
       L'argument de push sera le contenu du message sur le répondeur :
@@ -177,22 +178,22 @@
     opencv (fonction face recognition) va permettre de déterminer le prénom de la personne qui sera utilisé comme tag 
     pour ne lire que les messages qui lui sont adressés.
        
-    python pour l'appel du scénario :
+    python3 opencv face recognition pour l'appel du scénario :
+        #!/usr/bin/env python3
         .../...
-        # interface JEEDOM
+        import cv2
+        import face_recognition
+        import numpy as np
+        from tqdm import tqdm
+        from collections import defaultdict
+        from imutils.video import VideoStream
+        .../...
+        # interface avec JEEDOM
         URL_JEEDOM = "http://192.168.xxx.yyy/";
         API_KEY    = "xxxxxxxxxxxxxxxxxxxxxxxx";
         # connection
         URL=URL_JEEDOM+'/core/api/jeeApi.php'
         PHILIPPE={'apikey' : API_KEY , 'type' : 'scenario' , 'id' : 'zz', 'action' : 'start', 'tags' : 'HUMAN=PHILIPPE'}
-        .../...
-         #code opencv 
-         import cv2
-         import face_recognition
-         import numpy as np
-         from tqdm import tqdm
-         from collections import defaultdict
-          from imutils.video import VideoStream
         .../...
         # Detect faces
         faces = face_detector.detectMultiScale(
@@ -217,8 +218,6 @@
                 for i in matchedIdxs:
                     name = data["names"][i]
                     counts[name] = counts.get(name, 0) + 1
-                    #log_write("[LOG] name %s counts %s" % (name, counts[name]))
-
                 # determine the recognized face with the largest number of votes
                 name = max(counts, key=counts.get)
                 log_write("[LOG] human %s here" % name)
@@ -233,7 +232,7 @@
                         log_write("Jeedom is offline")
         .../...    
    
-   Création du scénario numéro zz appelé par le python opencv face recognition : OpenCV_Présence_Séjour_Lecture_Répondeur
+   Création du scénario numéro zz appelé par le python3 opencv face recognition : OpenCV_Présence_Séjour_Lecture_Répondeur
    
     SI tag(HUMAN) == "PHILIPPE"
     ACTION CODE :
