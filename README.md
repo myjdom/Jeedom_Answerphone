@@ -14,6 +14,7 @@
     Tout ce passe toujours en deux étapes :
    
    étape 1 : PUSH (push_message)
+    
        Pour mettre en file d'attente les messages le python notification_client.py est appelé dans Jeedom 
        via le plugin de programmation script :
        /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
@@ -23,6 +24,7 @@
        La zone Message (#message#) sera exclusivement réservée au contenu du message.
    
    étape 2 : PULL (lecture_repondeur)
+    
       Pour lire les messages on se base sur la détection de présence basé sur un simple capteur
       qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]# (ceci est exemple)
       La reconnaissance des personnes avec une camera avec opencv est une autre méthode de détection 
@@ -295,5 +297,5 @@
        #answer_number|timestamp_long|timestamp|read_timestamp_long|read_timestamp|read|cancel|priority|expire|tag|message|
        0|2019-12-31 15:08:42|1577801322|2019-12-31 15:09:33|1577801373|1|0|0|0|notag|à 15h08 bonjour|
        
-       
+    ### THE END ###
        
