@@ -278,19 +278,21 @@
 
    Installation en session ssh de préférence ou alors avec le plugin jeeXplorer :
 
-    * cd ~
-    * git clone https://github.com/myjdom/Jeedom_Answerphone.git
-    * cd Jeedom_Answerphone
-    * # Optional : Change port 8085 if you want in python code notification_server.py and notification_client.py
-    * sudo mkdir /root/daemon_server
-    * sudo cp -p notification_server.py notification_client.py /root/daemon_server
-    * sudo chmod +x /root/daemon_server/notification_server.py /root/daemon_server/notification_client.py
-    * sudo cp -p notification_server.service /etc/systemd/system/notification_server.service
-    * sudo ln -s /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
-    * sudo systemctl enable notification_server
-    * sudo systemctl start notification_server
-    * sudo systemctl status notification_server
-    * Configurer Etape 1 PUSH et Etape 2 PULL dans Jeedom (vous devez être à l'aise avec Jeedom pour faire ces deux étapes)
+    cd ~
+    git clone https://github.com/myjdom/Jeedom_Answerphone.git
+    cd Jeedom_Answerphone
+    # Optional : Change port 8085 if you want in python code notification_server.py and notification_client.py
+    sudo mkdir /root/daemon_server
+    sudo cp -p notification_server.py notification_client.py /root/daemon_server
+    sudo chmod +x /root/daemon_server/notification_server.py /root/daemon_server/notification_client.py
+    sudo cp -p notification_server.service /etc/systemd/system/notification_server.service
+    sudo ln -s /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
+    sudo systemctl enable notification_server
+    sudo systemctl start notification_server
+    sudo systemctl status notification_server
+    # Configurer Etape 1 PUSH et Etape 2 PULL dans Jeedom (vous devez être à l'aise avec Jeedom pour faire ces deux étapes)
+    # je prospose pour le push d'utiliser le plugin de programmation script
+    # et pour le pull d'utiliser un bloc CODE
 
 # Debug
 
