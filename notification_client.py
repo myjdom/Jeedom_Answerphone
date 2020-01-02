@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf8
 #-------------------------------------------------------------
-# philippeLC92 Verion 1.0 Décembre 2019
+# philippeLC92 Version 1.0 Décembre 2019
 #-------------------------------------------------------------
 # Installation :
 # cd ~
