@@ -1,5 +1,7 @@
 # Jeedom_Answerphone
 
+https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
+
 # Introduction :
 
     Répondeur Jeedom : gère une file d'attente des messages Jeedom en mode client/serveur 
