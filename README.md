@@ -30,7 +30,7 @@
       qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]# (ceci est exemple)
       La reconnaissance des personnes avec une camera avec opencv est une autre méthode de détection 
       qui permet une meilleure identification. Le scénario sera appelé dans ce cas avec les API de Jeedom
-      (voir les exerices plus loin)
+      (voir les exercises plus loin)
       Ce scénario sollicté par un présence utilise des blocs CODE de trois lignes de PHP 
       (c'est ce qui fonctionne le mieux pour ma part) :
        ACTION CODE :
