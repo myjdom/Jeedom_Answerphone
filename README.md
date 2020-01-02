@@ -291,8 +291,8 @@
     sudo systemctl start notification_server
     sudo systemctl status notification_server
     # Configurer Etape 1 PUSH et Etape 2 PULL dans Jeedom (vous devez être à l'aise avec Jeedom pour faire ces deux étapes)
-    # je prospose pour le push d'utiliser le plugin de programmation script
-    # et pour le pull d'utiliser un bloc CODE
+    # je propose pour le push d'utiliser le plugin de programmation script
+    # et pour le pull d'utiliser un bloc CODE de trois lignes de PHP (c'est ce qui fonctionne le mieux pour ma part)
 
 # Debug
 
