@@ -26,12 +26,12 @@
    
    étape 2 : PULL (lecture_repondeur)
     
-      Pour lire les messages on se base sur la détection de présence basé sur un simple capteur
-      qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]# (ceci est exemple)
-      La reconnaissance des personnes avec une camera avec opencv est une autre méthode de détection 
+      Pour lire les messages on se base sur la détection de présence basée sur un simple capteur
+      qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]# par exemple.
+      La reconnaissance des personnes avec une camera et opencv est une autre méthode de détection 
       qui permet une meilleure identification. Le scénario sera appelé dans ce cas avec les API de Jeedom
       (voir les exercises plus loin)
-      Ce scénario sollicté par un présence utilise des blocs CODE de trois lignes de PHP 
+      Ce scénario sollicité par une présence utilise des blocs CODE de trois lignes de PHP 
       (c'est ce qui fonctionne le mieux pour ma part) :
        ACTION CODE :
         $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --size 2>&1');
