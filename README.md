@@ -1,5 +1,9 @@
 # Jeedom_Answerphone
 
+     #-------------------------------------------------------------
+     # philippeLC92 Version 1.0 Décembre 2019
+     #-------------------------------------------------------------
+
 https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
 
 # Introduction :
