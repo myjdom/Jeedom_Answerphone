@@ -311,7 +311,8 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
     # Etape 2 :
     # Pour le pull il faut utiliser un scénario avec des blocs CODE de trois lignes de PHP 
     # (c'est ce qui fonctionne le mieux pour ma part).
-    # le Scénario doit être sollicité par une présence ou appelé en API par opencv avec le numéro de scénario
+    # le Scénario doit être sollicité par un simple détecteur présence ou appelé en URL/API avec le numéro de scénario 
+    # comme par exemple daemon en python3 qui utilise opencv pour la reconnaissance des personnes ou des visages :
     #   ACTION CODE :
     #    $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --size 2>&1');
     #    $scenario->setData('return', $output);
