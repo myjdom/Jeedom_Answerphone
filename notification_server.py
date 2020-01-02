@@ -3,7 +3,7 @@
 #-------------------------------------------------------------
 # philippeLC92 Version 1.0 Décembre 2019
 #-------------------------------------------------------------
-# Installation :
+# Installation : 
 # cd ~
 # git clone https://github.com/myjdom/Jeedom_Answerphone.git
 # cd Jeedom_Answerphone
