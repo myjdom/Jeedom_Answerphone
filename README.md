@@ -16,11 +16,12 @@
    étape 1 : PUSH (push_message)
     
        Pour mettre en file d'attente les messages le python notification_client.py est appelé dans Jeedom 
-       via le plugin de programmation script :
-       /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
+       via le plugin de programmation script (c'est la méthode la plus simple pour un appel depuis les scénarios)
+       Type script , action, message :
+         /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
        Il va solliciter les services du daemon notification_server.py sur le port 8085 pour lui demander
        de prendre en charge la gestion globale des messages.
-       La zone Titre (#title#) permet de postionner des options tel que par exemple : --tag verrou_portail --replace
+       La zone Titre (#title#) permet de poistionner des options tel que par exemple : --tag verrou_portail --replace
        La zone Message (#message#) sera exclusivement réservée au contenu du message.
    
    étape 2 : PULL (lecture_repondeur)
@@ -28,8 +29,10 @@
       Pour lire les messages on se base sur la détection de présence basé sur un simple capteur
       qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]# (ceci est exemple)
       La reconnaissance des personnes avec une camera avec opencv est une autre méthode de détection 
-      qui permet une meilleure identification. (une démo avec opencv sera proposée ultérieurement)
-      Le scénario sollicité est le suivant :
+      qui permet une meilleure identification. Le scénario sera appelé dans ce cas avec les API de Jeedom
+      (voir les exerices plus loin)
+      Ce scénario sollicté par un présence utilise des blocs CODE de trois lignes de PHP 
+      (c'est ce qui fonctionne le mieux pour ma part) :
        ACTION CODE :
         $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --size 2>&1');
         $scenario->setData('return', $output);
@@ -38,8 +41,8 @@
          $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --pull-all 2>&1');
          $output = html_entity_decode($output);
          $scenario->setData('return', $output);
-       ACTION : #[GoogleCast][Salon Google Home][Parle !]# 
-         Message : cmd=tts|value=variable(return)|speed=1.2|engine=gttsapi|voice=male|lang=fr-FR
+         ACTION : #[GoogleCast][Salon Google Home][Parle !]# 
+           Message : cmd=tts|value=variable(return)|speed=1.2|engine=gttsapi|voice=male|lang=fr-FR
          
 # --help
    
@@ -290,9 +293,30 @@
     sudo systemctl enable notification_server
     sudo systemctl start notification_server
     sudo systemctl status notification_server
+    #-----------------------------------------------------------------------------------------------------------------------
     # Configurer Etape 1 PUSH et Etape 2 PULL dans Jeedom (vous devez être à l'aise avec Jeedom pour faire ces deux étapes)
-    # je propose pour le push d'utiliser le plugin de programmation script
-    # et pour le pull d'utiliser un bloc CODE de trois lignes de PHP (c'est ce qui fonctionne le mieux pour ma part)
+    #-----------------------------------------------------------------------------------------------------------------------
+    # Etape 1 :
+    # je propose pour le push d'utiliser le plugin de programmation script car très facile à appelé dans les scénarios :
+    # Type script, action, message : /var/www/html/plugins/script/core/ressources/notification_client.py --push "#message#" "#title#"
+    # La zone Titre (#title#) permet de poistionner des options tel que par exemple : --tag verrou_portail --replace
+    # La zone Message (#message#) sera exclusivement réservée au contenu du message.
+    #-----------------------------------------------------------------------------------------------------------------------
+    # Etape 2 :
+    # Pour le pull il faut utiliser un scénario avec des blocs CODE de trois lignes de PHP 
+    # (c'est ce qui fonctionne le mieux pour ma part).
+    # le Scénario doit être sollicité par une présence ou appelé en API par opencv avec le numéro de scénario
+    #   ACTION CODE :
+    #    $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --size 2>&1');
+    #    $scenario->setData('return', $output);
+    #   SI variable(return) == 0 ALORS stop
+    #   SINON ACTION CODE :  
+    #     $output=shell_exec('/var/www/html/plugins/script/core/ressources/notification_client.py --pull-all 2>&1');
+    #     $output = html_entity_decode($output);
+    #     $scenario->setData('return', $output);
+    #     ACTION : #[GoogleCast][Salon Google Home][Parle !]# 
+    #       Message : cmd=tts|value=variable(return)|speed=1.2|engine=gttsapi|voice=male|lang=fr-FR
+    #-----------------------------------------------------------------------------------------------------------------------
 
 # Debug
 
