@@ -1,17 +1,24 @@
 #!/usr/bin/env python3
 # coding: utf8
 #-------------------------------------------------------------
-# Create  /root/daemon_server/notification_server.py
-# Create /root/daemon_server/notification_client.py
+# philippeLC92 Verion 1.0 Décembre 2019
 #-------------------------------------------------------------
-# Optional : Change port 8085 if you want in code here notification_server.py 
-# and here notification_client.py
-#-------------------------------------------------------------
-# Create /etc/systemd/system/notification_server.service
-# systemctl enable notification_server
-# systemctl start notification_server
-#------------------------------------------------------------
-
+# Installation :
+# cd ~
+# git clone https://github.com/myjdom/Jeedom_Answerphone.git
+# cd Jeedom_Answerphone
+# Optional : Change port 8085 if you want in python code notification_server.py and notification_client.py
+# sudo mkdir /root/daemon_server
+# sudo cp -p notification_server.py notification_client.py /root/daemon_server
+# sudo chmod +x /root/daemon_server/notification_server.py /root/daemon_server/notification_client.py
+# sudo cp -p notification_server.service /etc/systemd/system/notification_server.service
+# sudo ln -s /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
+# sudo systemctl enable notification_server
+# sudo systemctl start notification_server
+# sudo systemctl status notification_server
+#-----------------------------------------------------------------------------------------------------------------------
+# Configurer Etape 1 PUSH et Etape 2 PULL dans Jeedom : voir README.md
+#-----------------------------------------------------------------------------------------------------------------------
 import socket
 import traceback
 import sys
