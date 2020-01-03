@@ -50,11 +50,11 @@ clients_input=""
 for i in range(0,len(sys.argv)):
    log_write("arg[%s] : %s" % (i,str(sys.argv[i])))
    if sys.argv[i] == "--help":
-      print("Usage1 : --push 'message' [--answerphone-number number] [--tag tag_name] [--replace] [--priority 0|1] [--expire seconds] [--no-timestamp]")
-      print("Usage2 : --pull           [--answerphone-number number] [--tag tag_name] [--priority 0|1]")
-      print("Usage3 : --cancel         [--answerphone-number number] tag_name")
-      print("Usage4 : --size           [--answerphone-number number] [--tag tag_name]")
-      print("Usage5 : --list           [--answerphone-number number] [--tag tag_name]")
+      print("Usage1 : --push 'message'  [--answerphone-number number] [--tag tag_name] [--replace] [--priority 0|1] [--expire seconds] [--no-timestamp]")
+      print("Usage2 : --pull            [--answerphone-number number] [--tag tag_name] [--priority 0|1]")
+      print("Usage3 : --cancel tag_name [--answerphone-number number]")
+      print("Usage4 : --size            [--answerphone-number number] [--tag tag_name]")
+      print("Usage5 : --list            [--answerphone-number number] [--tag tag_name]")
       print("Usage6 : --list-all")
       print("Usage7 : --purge")
       print("Usage8 : --help")
