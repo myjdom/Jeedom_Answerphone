@@ -13,7 +13,7 @@
 # sudo chmod +x /root/daemon_server/notification_server.py /root/daemon_server/notification_client.py
 # sudo cp -p notification_server.service /etc/systemd/system/notification_server.service
 # sudo cp -p /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
-# sudo chown www-data:www-data /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
+# sudo chown www-data:www-data /var/www/html/plugins/script/core/ressources/notification_client.py
 # sudo systemctl enable notification_server
 # sudo systemctl start notification_server
 # sudo systemctl status notification_server
