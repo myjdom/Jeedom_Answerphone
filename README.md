@@ -61,7 +61,7 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
     Usage2  : --pull-all       [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number]
     Usage4  : --size           [--answerphone-number number] [--tag tag_name] [--priority numner]
     Usage5  : --list           [--answerphone-number number] [--tag tag_name] [--priority number]
-    Usage6  : --cancel         [--answerphone-number number] tag_name
+    Usage6  : --cancel         tag_name [--answerphone-number number]
     Usage7  : --list-all
     Usage9  : --purge
     Usage10 : --help
@@ -70,15 +70,23 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
     Il faut obligatoirement les associer avec un tag pour les options : --cancel --replace --no-duplicate
     --no-duplicate va éviter de remettre dans la file d'attente du répondeur une occurrence du même message tagué 
     avec la même valeur.
+    
+    L'option --cancel tag_name va annuler tous les messages qui n'ont pas été lu portant ce tag.
+     
+    L'option --replace accompagné de l'option --tag tag_name (sinon cela n'a aucun effet) commence 
+    par éliminer du répondeur tous les messages avec ce même tag avant d'ajouter le nouveau message proposé
+    
+    L'option --no-duplicate accompagné de l'option --tag tag_name (sinon cela n'a aucun effet) ajoutera le message
+    seulement si les précédents messages avec ce tag ont été lu sinon le message ne sera pas ajouté au répondeur.
         
     L'option --list-all permet de voir l'historique et comment le message a été traité 
      (soit un read ou un cancel suite à un replace ou un expire):
      Exemple de valeurs pour un message :
       read=1 cancel=0 priority=0 expire=0 elapse=no_expire
       
-    Par défaut chaque message est horodaté pour le jour courant de sa création (timestamp) 
-    pour savoir à quelle heure le message a été créé.
-    Exemple : "à 10h30 vous avez reçu un colis dans la boite au lettre"
+    Par défaut chaque message est horodaté pour la journée en cours de sa création (timestamp) 
+    et permet de connaitre ainsi à quelle heure le message a été créé.
+    Exemple : "à 10h30 vous avez reçu un colis dans la boite aux lettres"
     --no-timestamp permet de ne pas préfixer le message par l'heure arrivée 
     
     L'option --expire seconds donne une durée de vie au message et va permette de faire un cancel automatique.
