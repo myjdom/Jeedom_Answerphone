@@ -12,13 +12,15 @@
 # sudo cp -p notification_server.py notification_client.py /root/daemon_server
 # sudo chmod +x /root/daemon_server/notification_server.py /root/daemon_server/notification_client.py
 # sudo cp -p notification_server.service /etc/systemd/system/notification_server.service
-# sudo ln -s /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
+# sudo cp -p /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
+# sudo chown www-data:www-data /root/daemon_server/notification_client.py /var/www/html/plugins/script/core/ressources/notification_client.py
 # sudo systemctl enable notification_server
 # sudo systemctl start notification_server
 # sudo systemctl status notification_server
 #-----------------------------------------------------------------------------------------------------------------------
 # Configurer Etape 1 PUSH et Etape 2 PULL dans Jeedom : voir README.md
 #-----------------------------------------------------------------------------------------------------------------------
+
 import socket
 import traceback
 import sys
@@ -46,19 +48,27 @@ if codechar == "ascii":
 else:
    log_write("Code : %s " % codechar)
 
+port=8085
 clients_input=""
 for i in range(0,len(sys.argv)):
    log_write("arg[%s] : %s" % (i,str(sys.argv[i])))
    if sys.argv[i] == "--help":
-      print("Usage1 : --push 'message'  [--answerphone-number number] [--tag tag_name] [--replace] [--priority 0|1] [--expire seconds] [--no-timestamp]")
-      print("Usage2 : --pull            [--answerphone-number number] [--tag tag_name] [--priority 0|1]")
-      print("Usage3 : --cancel tag_name [--answerphone-number number]")
-      print("Usage4 : --size            [--answerphone-number number] [--tag tag_name]")
-      print("Usage5 : --list            [--answerphone-number number] [--tag tag_name]")
-      print("Usage6 : --list-all")
-      print("Usage7 : --purge")
-      print("Usage8 : --help")
+      print("Usage1  : --push 'message'  [--answerphone-number number] [--tag tag_name] [--priority number] [--replace] [--no-duplicate] [--expire seconds] [--no-timestamp]")
+      print("Usage2  : --pull            [--answerphone-number number] [--tag tag_name] [--priority number]")
+      print("Usage2  : --pull-all        [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number]")
+      print("Usage4  : --size            [--answerphone-number number] [--tag tag_name] [--priority numner]")
+      print("Usage5  : --list            [--answerphone-number number] [--tag tag_name] [--priority number]")
+      print("Usage6  : --cancel tag_name [--answerphone-number number]")
+      print("Usage7  : --list-all")
+      print("Usage9  : --purge")
+      print("Usage10 : --help")
       break
+   elif sys.argv[i] == "--port":
+      try:
+         i += 1
+         port = int(sys.argv[i])
+      except:
+         pass
    else:
       if clients_input == "":
          clients_input = str(sys.argv[i])
@@ -71,7 +81,7 @@ log_write("Args: %s" % clients_input)
 if clients_input != "":
    soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    try:
-      soc.connect(("127.0.0.1", 8085))
+      soc.connect(("127.0.0.1", port))
       try:
          soc.send(clients_input.encode("utf8")) # we must encode the string to bytes
          log_write("send utf8: %s" % clients_input)
@@ -87,7 +97,7 @@ if clients_input != "":
          soc.send(clients_input) # we must encode the string to bytes
          log_write("send no utf8: %s" % clients_input)
    except:
-      log_write("Socket 127.0.0.1:8085 connection error")
+      log_write("Socket 127.0.0.1:%s connection error" % port)
       traceback.print_exc()
 else:
    print("Usage : --help")
