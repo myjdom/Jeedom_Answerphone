@@ -57,11 +57,11 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
     ./notification_client.py --help
 
     Usage1  : --push 'message' [--answerphone-number number] [--tag tag_name] [--priority number] [--replace] [--no-duplicate] [--expire seconds] [--no-timestamp]
-    Usage2  : --pull           [--answerphone-number number] [--tag tag_name] [--priority number]
-    Usage2  : --pull-all       [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number]
-    Usage4  : --size           [--answerphone-number number] [--tag tag_name] [--priority numner]
-    Usage5  : --list           [--answerphone-number number] [--tag tag_name] [--priority number]
-    Usage6  : --cancel         tag_name [--answerphone-number number]
+    Usage2  : --pull            [--answerphone-number number] [--tag tag_name] [--priority number]
+    Usage2  : --pull-all        [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number]
+    Usage4  : --size            [--answerphone-number number] [--tag tag_name] [--priority numner]
+    Usage5  : --list            [--answerphone-number number] [--tag tag_name] [--priority number]
+    Usage6  : --cancel tag_name [--answerphone-number number]
     Usage7  : --list-all
     Usage9  : --purge
     Usage10 : --help
