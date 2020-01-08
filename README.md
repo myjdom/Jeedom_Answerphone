@@ -97,6 +97,9 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
     L'option --priority number (valeur par défaut 0) peut être très utile pour donner une criticité relative aux messages.
     On peut ainsi lire les messages importants avant tous les autres pour les délivrer en priorité à la personne. 
     
+    L'option --purge efface l'historique des messages et
+    ceux qui n'ont pas été encore lu.
+    
     
 # Exemples 
 
