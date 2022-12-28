@@ -30,7 +30,7 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
        La zone Titre (#title#) permet de poistionner des options tel que par exemple : --tag verrou_portail --replace
        La zone Message (#message#) sera exclusivement réservée au contenu du message.
    
-   étape 2 : PULL (lecture_repondeur)
+   étape 2 : PULL (lecture_repondeur) ou GET (lecture_repondeur sans supprimer les messages)
     
       Pour lire les messages on se base sur la détection de présence basée sur un simple capteur
       qui sollicite un scénario à partir d'un Evénement : #[PhilipsHue][Sensor séjour][Présence]# par exemple.
@@ -56,22 +56,27 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
    
     ./notification_client.py --help
 
-    Usage1  : --push 'message' [--answerphone-number number] [--tag tag_name] [--priority number] [--replace] [--no-duplicate] [--expire seconds] [--no-timestamp]
+    Usage1  : --push 'message'  [--answerphone-number number] [--tag tag_name] [--priority number] [--replace] [--no-duplicate] [--expire seconds] [--no-timestamp]
     Usage2  : --pull            [--answerphone-number number] [--tag tag_name] [--priority number]
-    Usage2  : --pull-all        [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number]
-    Usage4  : --size            [--answerphone-number number] [--tag tag_name] [--priority numner]
-    Usage5  : --list            [--answerphone-number number] [--tag tag_name] [--priority number]
-    Usage6  : --cancel tag_name [--answerphone-number number]
-    Usage7  : --list-all
-    Usage9  : --purge
-    Usage10 : --help
+    Usage3  : --pull-all        [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number] [--no-prefix]
+    Usage4  : --get-all         [--answerphone-number number] [--tag tag_name] [--priority number] [--no-prefix]
+                                as --pull-all but keep queued : to manage queue use --push with --replace or --cancel
+    Usage5  : --size            [--answerphone-number number] [--tag tag_name] [--priority numner]
+    Usage6  : --list            [--answerphone-number number] [--tag tag_name] [--priority number]
+    Usage7  : --cancel tag_name [--answerphone-number number]
+    Usage8  : --cancel-all tag_name
+    Usage9  : --list-all
+    Usage10 : --purge
+    Usage11 : --help
   
-    Les options --cancel --replace --no-duplicate --expire permettent de gérer les messages dans la file d'attente.
+    Les options --cancel --cancel-all --replace --no-duplicate --expire permettent de gérer les messages dans la file d'attente.
     Il faut obligatoirement les associer avec un tag pour les options : --cancel --replace --no-duplicate
     --no-duplicate va éviter de remettre dans la file d'attente du répondeur une occurrence du même message tagué 
     avec la même valeur.
     
     L'option --cancel tag_name va annuler tous les messages qui n'ont pas été lu portant ce tag.
+
+    L'option --cancel-all tag_name va annuler tous les messages qui n'ont pas été lu portant ce tag sur tous les répondeurs.
      
     L'option --replace accompagné de l'option --tag tag_name (sinon cela n'a aucun effet) commence 
     par éliminer du répondeur tous les messages avec ce même tag avant d'ajouter le nouveau message proposé
@@ -100,6 +105,8 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
     L'option --purge efface l'historique des messages et
     ceux qui n'ont pas été encore lu.
     
+    le mode --get-all permet de récuperer et de garder tous les messages dans la file d'attente sans les supprimer.
+    et pour le pas préfixer "Vous avez N messages" il faut utiliser --no-prefix
     
 # Exemples 
 
@@ -146,6 +153,25 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
      ./notification_client.py --pull-all --answerphone-number 1 --tag verrou_portail
        ==> retourne tous les derniers messages en attente de lecture sur le répondeur numéro 1 pour le tag verrou_portail
        
+   Exemples avec un numéro de répondeur et un tag et la fonction --get-all :
+
+     ./notification_client.py --push 'le verrou du portail est ouvert' --answerphone-number 1 --tag verrou_portail
+       ==> met en attente un message sur le répondeur numéro 1 avec le tag verrou_portail
+
+     ./notification_client.py --push 'caresser le chat' --answerphone-number 1 --tag le_chat
+       ==> met en attente un message sur le répondeur numéro 1 avec le tag le_chat
+
+     ./notification_client.py --get-all --answerphone-number 1
+       ==> retourne tous messages sur le répondeur numéro 1 mais reste disponible pour une relecture tant qu'il n'est pas supprimé
+           Vous avez 3 messages caresser le chat le verrour du portail est ouvert
+           pour le pas préfixer "Vous avez N messages" il faut utiliser --no-prefix
+
+     ./notification_client.py --cancel --answerphone-number 1 --tag verrou_portail
+       ==> supprime le message sur le répondeur numéro 1 pour le tag verrou_portail
+
+     ./notification_client.py --cancel --answerphone-number 1 --tag le_chzt
+       ==> supprime le message sur le répondeur numéro 1 pour le tag le_chat
+
 # Exercises
 
    Exercise 1 : utilisation du répondeur pour des citations venant de Kaamelott-Quote.py

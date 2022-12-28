@@ -59,10 +59,12 @@ def push_and_pull(input_string):
     push=0
     pull_one=0
     pull_all=0
+    get_all=0
     list_queued=0
     list_all=0
     size=0
     cancel=0
+    cancel_all=0
     tag="unknown"
     priority=-1
     timestamp=1
@@ -72,6 +74,7 @@ def push_and_pull(input_string):
     myreturn=0
     answerphone_number=-1
     repull=0
+    prefix=1
     try:
        res = input_string.split(' ')
        totw=len(res)
@@ -92,13 +95,13 @@ def push_and_pull(input_string):
     while i < totw:
        cmd = res[i]
        if cmd == "--list":
-          list_queued=1; list_all=0; size=0; push=0; pull_one=0; pull_all=0; cancel=0; replace=0; no_duplicate=0
+          list_queued=1; list_all=0; size=0; push=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
        if cmd == "--list-all":
-          list_queued=0; list_all=1; size=0; push=0; pull_one=0; pull_all=0; cancel=0; replace=0; no_duplicate=0
+          list_queued=0; list_all=1; size=0; push=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
        elif cmd == "--size":
-          list_queued=0; list_all=0; size=1; push=0; pull_one=0; pull_all=0; cancel=0; replace=0; no_duplicate=0
+          list_queued=0; list_all=0; size=1; push=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
        elif cmd == "--purge":
-          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; cancel=0; replace=0; no_duplicate=0
+          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
           del message_list[:]
           del timestamp_list[:]
           del timestamp_long_list[:]
@@ -113,19 +116,25 @@ def push_and_pull(input_string):
           myreturn=str(len(message_list))
           break
        elif cmd == "--pull":
-          list_queued=0; list_all=0; size=0; push=0; pull_one=1; pull_all=0; cancel=0; replace=0; no_duplicate=0
+          list_queued=0; list_all=0; size=0; push=0; pull_one=1; pull_all=0; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
+       elif cmd == "--get":
+          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
        elif cmd == "--pull-all":
-          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=1; cancel=0; replace=0; no_duplicate=0
+          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=1; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
+       elif cmd == "--get-all":
+          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; get_all=1; cancel=0; cancel_all=0; replace=0; no_duplicate=0
        elif cmd == "--no-timestamp":
-          list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; cancel=0; timestamp=0
+          list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0; timestamp=0
+       elif cmd == "--no-prefix":
+          list_queued=0; list_all=0; size=0; cancel=0; cancel_all=0; prefix=0
        elif cmd == "--replace":
-          list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; cancel=0; replace=1; no_duplicate=0
+          list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0; replace=1; no_duplicate=0
        elif cmd == "--no-duplicate":
-          list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; cancel=0; replace=0; no_duplicate=1
+          list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=1
        elif cmd == "--push":
-          list_queued=0; list_all=0; size=0; push=1; pull_one=0; pull_all=0; cancel=0
+          list_queued=0; list_all=0; size=0; push=1; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0
        elif cmd == "--tag":
-          cancel=0; list_all=0
+          cancel=0; cancel_all=0; list_all=0
           if i < totw-1:
              i += 1
              tag=res[i]
@@ -139,28 +148,35 @@ def push_and_pull(input_string):
           else:
              log_write ("ERROR : cmd answerphone number empty")
        elif cmd == "--cancel":
-          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; cancel=1; replace=0; no_duplicate=0
+          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; get_all=0; cancel=1; cancel_all=0; replace=0; no_duplicate=0
+          if i < totw-1:
+             i += 1
+             tag=res[i]
+          else:
+             log_write ("ERROR : cmd tag empty")
+       elif cmd == "--cancel-all":
+          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; get_all=0; cancel=1; cancel_all=1; replace=0; no_duplicate=0
           if i < totw-1:
              i += 1
              tag=res[i]
           else:
              log_write ("ERROR : cmd tag empty")
        elif cmd == "--priority":
-          list_all=0; cancel=0
+          list_all=0; cancel=0; cancel_all=0
           if i < totw-1:
              i += 1
              priority=int(res[i])
           else:
              log_write ("ERROR : cmd priority empty")
        elif cmd == "--expire":
-          list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; cancel=0
+          list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0
           if i < totw-1:
              i += 1
              expire=int(res[i])
           else:
              log_write ("ERROR : cmd expire time empty")
        elif cmd == "--repull":
-          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=1; cancel=0; replace=0; no_duplicate=0
+          list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=1; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
           if i < totw-1:
              i += 1
              repull=int(res[i])
@@ -224,16 +240,17 @@ def push_and_pull(input_string):
           #index=len(message_list)-1
        myreturn=str(size_list(tag,answerphone_number))
 
-    if pull_one == 1 or pull_all == 1:
+    if pull_one == 1 or pull_all == 1 or get_all == 1 :
        myreturn="empty"
        total_messages=0
        if len(message_list) != 0:
-          if repull == 0 or pull_one == 1:
+          if repull == 0:
              for index in range(len(message_list)):
                 if read_status_list[index] == 0 and cancel_status_list[index] == 0:
                    if (tag_list[index] == tag or tag == "unknown") and ((answerphone_number == -1 and answerphone_number_list[index] == 0) or (answerphone_number == answerphone_number_list[index])):
                       if priority_list[index] == priority or priority == -1:
-                         read_status_list[index]=1
+                         if get_all != 1:
+                             read_status_list[index]=1
                          read_timestamp_list[index]=calendar.timegm(time.gmtime())
                          read_timestamp_long_list[index]=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                          total_messages += 1
@@ -245,7 +262,7 @@ def push_and_pull(input_string):
                                myreturn=message_list[index]
                             else:
                                myreturn=myreturn + " " + message_list[index]
-             if pull_all == 1 and total_messages>=1:
+             if (pull_all == 1 or get_all == 1) and total_messages>=1 and prefix == 1:
                 myreturn="Vous avez " + str(total_messages) + " messages " + myreturn
           else:
              for index in reversed(range(len(message_list))):
@@ -260,7 +277,7 @@ def push_and_pull(input_string):
                          repull += -1
                          if repull == 0:
                             break
-             if total_messages>=1:
+             if total_messages>=1 and prefix == 1:
                 myreturn="Vous avez " + str(total_messages) + " messages " + myreturn
        log_write ("INFO : pull return : %s" % myreturn)
 
@@ -269,7 +286,7 @@ def push_and_pull(input_string):
        if len(message_list) != 0:
           for index in range(len(message_list)):
              if read_status_list[index] == 0 and cancel_status_list[index] == 0:
-                if (tag_list[index] == tag or tag == "unknown") and ((answerphone_number == -1 and answerphone_number_list[index] == 0) or (answerphone_number == answerphone_number_list[index])):
+                if ((tag_list[index] == tag or tag == "unknown") and ((answerphone_number == -1 and answerphone_number_list[index] == 0) or (answerphone_number == answerphone_number_list[index]))) or (tag_list[index] == tag and cancel_all == 1):
                    cancel_status_list[index]=1
                    log_write ("INFO : message canceled : %s read: %s cancel: %s tag: %s priority: %s" % (index,read_status_list[index],cancel_status_list[index],tag,priority))
        myreturn=str(size_list(tag,answerphone_number))
@@ -310,7 +327,7 @@ def push_and_pull(input_string):
        os.chmod(dump_file, 0o664)
        os.chown(dump_file, pwd.getpwnam("www-data").pw_uid, grp.getgrnam("www-data").gr_gid)
 
-    log_write("INFO : push=%s pull_one=%s pull_all=%s repull=%s list_queued=%s list_all=%s size=%s cancel=%s tag=%s priority=%s timestamp=%s expire=%s replace=%s myreturn=%s answerphone_number=%s" % (push, pull_one, pull_all, repull, list_queued, list_all, size, cancel, tag, priority, timestamp, expire, replace, myreturn, answerphone_number))
+    log_write("INFO : push=%s pull_one=%s pull_all=%s get_all=%s repull=%s list_queued=%s list_all=%s size=%s cancel=%s tag=%s priority=%s timestamp=%s expire=%s replace=%s myreturn=%s answerphone_number=%s" % (push, pull_one, pull_all, get_all, repull, list_queued, list_all, size, cancel, tag, priority, timestamp, expire, replace, myreturn, answerphone_number))
     return str(myreturn)
 
 def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):

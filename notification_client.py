@@ -55,13 +55,16 @@ for i in range(0,len(sys.argv)):
    if sys.argv[i] == "--help":
       print("Usage1  : --push 'message'  [--answerphone-number number] [--tag tag_name] [--priority number] [--replace] [--no-duplicate] [--expire seconds] [--no-timestamp]")
       print("Usage2  : --pull            [--answerphone-number number] [--tag tag_name] [--priority number]")
-      print("Usage2  : --pull-all        [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number]")
-      print("Usage4  : --size            [--answerphone-number number] [--tag tag_name] [--priority numner]")
-      print("Usage5  : --list            [--answerphone-number number] [--tag tag_name] [--priority number]")
-      print("Usage6  : --cancel tag_name [--answerphone-number number]")
-      print("Usage7  : --list-all")
-      print("Usage9  : --purge")
-      print("Usage10 : --help")
+      print("Usage3  : --pull-all        [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number] [--no-prefix] ")
+      print("Usage4  : --get-all         [--answerphone-number number] [--tag tag_name] [--priority number] [--no-prefix]")
+      print("                            as --pull-all but keep queued : to manage queue use --push with --replace or --cancel")
+      print("Usage5  : --size            [--answerphone-number number] [--tag tag_name] [--priority numner]")
+      print("Usage6  : --list            [--answerphone-number number] [--tag tag_name] [--priority number]")
+      print("Usage7  : --cancel tag_name [--answerphone-number number]")
+      print("Usage8  : --cancel-all tag_name")
+      print("Usage9  : --list-all")
+      print("Usage10 : --purge")
+      print("Usage11 : --help")
       break
    elif sys.argv[i] == "--port":
       try:
