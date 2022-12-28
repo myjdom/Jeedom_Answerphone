@@ -178,7 +178,7 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
      ./notification_client.py --cancel --answerphone-number 1 --tag verrou_portail
        ==> supprime le message sur le répondeur numéro 1 pour le tag verrou_portail
 
-     ./notification_client.py --cancel --answerphone-number 1 --tag le_chzt
+     ./notification_client.py --cancel --answerphone-number 1 --tag le_chat
        ==> supprime le message sur le répondeur numéro 1 pour le tag le_chat
 
 # Exercises
