@@ -22,7 +22,7 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
     Permet de gérer un répondeur qui garde les messages pour être lu autant de fois que l'on souhaite
     afin de l'afficher sur une horloge intelligente comme LAMETRIC TIME (utilisation du plugin pour Jeedom).
     Le seul moyen de nettoyer le répondeur est d'utiliser la fonction --expire ou --cancel ou --cancel-all
-    Il est recomandé d'utiliser un numéro de répondeur différent de 0 (expmple 1) pour LAMETRIC TIME
+    Il est recomandé d'utiliser un numéro de répondeur différent de 0 (exemple 1) pour LAMETRIC TIME
     
  # Généralités :
    
