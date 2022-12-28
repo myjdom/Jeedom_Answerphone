@@ -2,6 +2,7 @@
 # coding: utf8
 #-------------------------------------------------------------
 # philippeLC92 Version 1.0 Décembre 2019
+#              Version 1.1 Décembre 2022
 #-------------------------------------------------------------
 # Installation :
 # cd ~
@@ -57,7 +58,7 @@ for i in range(0,len(sys.argv)):
       print("Usage2  : --pull            [--answerphone-number number] [--tag tag_name] [--priority number]")
       print("Usage3  : --pull-all        [--answerphone-number number] [--tag tag_name] [--priority number] [--repull number] [--no-prefix] ")
       print("Usage4  : --get-all         [--answerphone-number number] [--tag tag_name] [--priority number] [--no-prefix]")
-      print("                            as --pull-all but keep queued : to manage queue use --push with --replace or --cancel")
+      print("                            as --pull-all but keep queued : to manage queue use --push with --replace or --cancel or --cancel-all")
       print("Usage5  : --size            [--answerphone-number number] [--tag tag_name] [--priority numner]")
       print("Usage6  : --list            [--answerphone-number number] [--tag tag_name] [--priority number]")
       print("Usage7  : --cancel tag_name [--answerphone-number number]")

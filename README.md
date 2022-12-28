@@ -2,6 +2,7 @@
 
     #-------------------------------------------------------------
     # philippeLC92 Version 1.0 Décembre 2019
+    #              Version 1.1 Décembre 2022
     #-------------------------------------------------------------
 
 https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
@@ -14,6 +15,14 @@ https://community.jeedom.com/t/proposition-de-repondeur-jeedom/12781
     de présence ou une reconnaissance de personnes ou de visages avec opencv.
     
     Il est possible de gérer plusieurs répondeurs. Le répondeur par défault porte le numéro 0
+    
+ # Version 1.1 2023 :
+
+    Nouvelle fonction --get-all et aussi --cancel-all :
+    Permet de gérer un répondeur qui garde les messages pour être lu autant de fois que l'on souhaite
+    afin de l'afficher sur une horloge intelligente comme LAMETRIC TIME (utilisation du plugin pour Jeedom).
+    Le seul moyen de nettoyer le répondeur est d'utiliser la fonction --expire ou --cancel ou --cancel-all
+    Il est recomandé d'utiliser un numéro de répondeur différent de 0 (expmple 1) pour LAMETRIC TIME
     
  # Généralités :
    
