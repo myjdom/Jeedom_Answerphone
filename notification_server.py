@@ -50,12 +50,12 @@ def size_list(tag,answerphone_number):
          if read_status_list[index] == 0 and cancel_status_list[index] == 0:
             if (tag_list[index] == tag or tag == "unknown") and ((answerphone_number == -1 and answerphone_number_list[index] == 0) or (answerphone_number == answerphone_number_list[index])):
                size += 1
-   log_write ("INFO : size return : %s" % size)
+   log_write("INFO : size return : %s" % size)
    return size
 
 def push_and_pull(input_string):
 
-    log_write ("INFO : input %s" % input_string)
+    log_write("INFO : input %s" % input_string)
     message=""
     push=0
     pull_one=0
@@ -80,7 +80,7 @@ def push_and_pull(input_string):
        res = input_string.split(' ')
        totw=len(res)
     except:
-       log_write ("ERROR : return input failed : -1")
+       log_write("ERROR : return input failed : -1")
        return "-1"
     #-----------------------------
     # cancel expire message
@@ -88,9 +88,9 @@ def push_and_pull(input_string):
     for index in range(len(message_list)):
        timestamp_sec=calendar.timegm(time.gmtime())
        elapse_time=timestamp_sec-timestamp_list[index]
-       if elapse_time > int(expire_time_list[index]) and expire_time_list[index] != 0:
+       if elapse_time > int(expire_time_list[index]) and expire_time_list[index] != 0 and cancel_status_list[index] == 0:
           cancel_status_list[index]=1
-          log_write ("INFO : cancel expired message : %s read: %s cancel: %s timestamp: %ss expire: %ss elapse: %ss" % (index,read_status_list[index],cancel_status_list[index],timestamp_list[index],expire_time_list[index],elapse_time))
+          log_write("INFO : cancel expired message : %s read: %s cancel: %s timestamp: %ss expire: %ss elapse: %ss" % (index,read_status_list[index],cancel_status_list[index],timestamp_list[index],expire_time_list[index],elapse_time))
 
     i=0
     while i < totw:
@@ -140,49 +140,49 @@ def push_and_pull(input_string):
              i += 1
              tag=res[i]
           else:
-             log_write ("ERROR : cmd tag empty")
+             log_write("ERROR : cmd tag empty")
        elif cmd == "--answerphone-number":
           list_all=0
           if i < totw-1:
              i += 1
              answerphone_number=int(res[i])
           else:
-             log_write ("ERROR : cmd answerphone number empty")
+             log_write("ERROR : cmd answerphone number empty")
        elif cmd == "--cancel":
           list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; get_all=0; cancel=1; cancel_all=0; replace=0; no_duplicate=0
           if i < totw-1:
              i += 1
              tag=res[i]
           else:
-             log_write ("ERROR : cmd tag empty")
+             log_write("ERROR : cmd tag empty")
        elif cmd == "--cancel-all":
           list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=0; get_all=0; cancel=1; cancel_all=1; replace=0; no_duplicate=0
           if i < totw-1:
              i += 1
              tag=res[i]
           else:
-             log_write ("ERROR : cmd tag empty")
+             log_write("ERROR : cmd tag empty")
        elif cmd == "--priority":
           list_all=0; cancel=0; cancel_all=0
           if i < totw-1:
              i += 1
              priority=int(res[i])
           else:
-             log_write ("ERROR : cmd priority empty")
+             log_write("ERROR : cmd priority empty")
        elif cmd == "--expire":
           list_queued=0; list_all=0; size=0; pull_one=0; pull_all=0; get_all=0; cancel=0; cancel_all=0
           if i < totw-1:
              i += 1
              expire=int(res[i])
           else:
-             log_write ("ERROR : cmd expire time empty")
+             log_write("ERROR : cmd expire time empty")
        elif cmd == "--repull":
           list_queued=0; list_all=0; size=0; push=0; pull_one=0; pull_all=1; get_all=0; cancel=0; cancel_all=0; replace=0; no_duplicate=0
           if i < totw-1:
              i += 1
              repull=int(res[i])
           else:
-             log_write ("ERROR : repull number empty")
+             log_write("ERROR : repull number empty")
        else:
           if push == 1:
              if message == "":
@@ -201,14 +201,14 @@ def push_and_pull(input_string):
                 if tag_list[index] == tag and ((answerphone_number == -1 and answerphone_number_list[index] == 0) or (answerphone_number == answerphone_number_list[index])):
                    if read_status_list[index] == 0 and cancel_status_list[index] == 0:
                       cancel_status_list[index]=1
-                      log_write ("INFO : message canceled to replace : %s read: %s cancel: %s timestamp: %s" % (index,read_status_list[index],cancel_status_list[index],timestamp_list[index]))
+                      log_write("INFO : message canceled to replace : %s read: %s cancel: %s timestamp: %s" % (index,read_status_list[index],cancel_status_list[index],timestamp_list[index]))
        if tag != "unknown" and no_duplicate == 1:
           if len(message_list) != 0:
              for index in range(len(message_list)):
                 if tag_list[index] == tag and ((answerphone_number == -1 and answerphone_number_list[index] == 0) or (answerphone_number == answerphone_number_list[index])):
                    if read_status_list[index] == 0 and cancel_status_list[index] == 0:
                       add_message_queue=0
-                      log_write ("INFO : message keep the original (no duplicate) : %s read: %s cancel: %s timestamp: %s" % (index,read_status_list[index],cancel_status_list[index],timestamp_list[index]))
+                      log_write("INFO : message keep the original (no duplicate) : %s read: %s cancel: %s timestamp: %s" % (index,read_status_list[index],cancel_status_list[index],timestamp_list[index]))
        if add_message_queue == 1:
           if timestamp == 1:
              message = "à " + datetime.now().strftime('%Hh%M') + " " + message
@@ -229,10 +229,10 @@ def push_and_pull(input_string):
           else:
              priority_list.append(priority)
           if answerphone_number == -1:
-             log_write("ans set %s" % answerphone_number)
+             log_write("INFO : answerphone_number set %s" % answerphone_number)
              answerphone_number_list.append(0)
           else:
-             log_write("ans %s" % answerphone_number)
+             log_write("INFO : answerphone_number selected %s" % answerphone_number)
              answerphone_number_list.append(answerphone_number)
           read_timestamp_list.append(calendar.timegm(time.gmtime()))
           read_timestamp_long_list.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
@@ -280,7 +280,7 @@ def push_and_pull(input_string):
                             break
              if total_messages>=1 and prefix == 1:
                 myreturn="Vous avez " + str(total_messages) + " messages " + myreturn
-       log_write ("INFO : pull return : %s" % myreturn)
+       log_write("INFO : pull return : %s" % myreturn)
 
     if cancel == 1:
        myreturn="empty"
@@ -289,7 +289,7 @@ def push_and_pull(input_string):
              if read_status_list[index] == 0 and cancel_status_list[index] == 0:
                 if ((tag_list[index] == tag or tag == "unknown") and ((answerphone_number == -1 and answerphone_number_list[index] == 0) or (answerphone_number == answerphone_number_list[index]))) or (tag_list[index] == tag and cancel_all == 1):
                    cancel_status_list[index]=1
-                   log_write ("INFO : message canceled : %s read: %s cancel: %s tag: %s priority: %s" % (index,read_status_list[index],cancel_status_list[index],tag,priority))
+                   log_write("INFO : message canceled : %s read: %s cancel: %s tag: %s priority: %s" % (index,read_status_list[index],cancel_status_list[index],tag,priority))
        myreturn=str(size_list(tag,answerphone_number))
 
     if list_queued == 1 or list_all == 1:
